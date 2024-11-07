@@ -1,21 +1,21 @@
 # palette = 'catppuccin_latte'
 # palette = 'catppuccin_frappe'
 # palette = 'catppuccin_macchiato'
-palette = 'catppuccin_mocha'
+palette = 'kanagawa_dark'
 
 format = """
 ($status\n)\
-[](color_mantle)\
+[](color_bg)\
 $os\
 $username\
-[ ](bg:color_mantle fg:color_mantle)\
+[ ](bg:color_bg fg:color_bg)\
 ${custom.is_folder_config}\
 $directory\
-[ ](fg:color_mantle bg:color_mantle)\
+[ ](fg:color_bg bg:color_bg)\
 $git_branch\
 $git_status\
 $git_commit\
-[ ](fg:color_mantle bg:color_mantle)\
+[ ](fg:color_bg bg:color_bg)\
 $c\
 ${custom.cpp-gcc}\
 $rust\
@@ -34,16 +34,16 @@ $meson\
 ${env_var.shell}\
 $shell\
 ${custom.nvim}\
-[ ](fg:color_mantle bg:color_mantle)\
+[ ](fg:color_bg bg:color_bg)\
 $cmd_duration\
-[ ](fg:color_mantle)\
+[ ](fg:color_bg)\
 $line_break$character"""
 
 add_newline = true
 
 [os]
 disabled = true
-style = "bg:color_mantle fg:color_text"
+style = "bg:color_bg fg:color_fg"
 
 [cmd_duration]
 min_time = 1_000
@@ -52,7 +52,7 @@ min_time_to_notify = 10_000
 
 show_milliseconds = true
 format = '[$duration ]($style)'
-style = 'fg:color_pink bg:color_mantle'
+style = 'fg:color_fg_light bg:color_bg'
 
 
 
@@ -61,14 +61,14 @@ disabled = true
 when = "echo $PWD | grep -q '/.config'"
 symbol = ' '
 format = '[$symbol]($style)'
-style = 'fg:color_blue bg:color_mantle'
+style = 'fg:color_blue bg:color_bg'
 
 [env_var.shell]
 disabled = true
 symbol = ''
 variable = 'SHELL'
 format = '[($symbol $env_value )]($style)'
-style = 'fg:color_lavender bg:color_mantle'
+style = 'fg:color_fg_recognized bg:color_bg'
 
 [shell]
 disabled = true
@@ -78,20 +78,20 @@ disabled = true
 when = "echo $PWD | grep -q '.config/nvim'"
 symbol = ' '
 format = '[$symbol($output )]($style)'
-style = 'fg:color_lavender bg:color_mantle'
+style = 'fg:color_fg_recognized bg:color_bg'
 command = "nvim --version | head -n 1 | tr ' ' '\n' | tail -n 1"
 
 [meson]
 symbol = 'Meson: '
 format = '[$symbol(\($project\) )]($style)'
-style = 'fg:color_lavender bg:color_mantle'
+style = 'fg:color_fg_recognized bg:color_bg'
 
 
 
 [directory]
 truncate_to_repo = true
-format = '[([$read_only ]($style fg:color_red))$path ]($style)'
-style = 'fg:color_text bg:color_mantle'
+format = '[([$read_only ]($style fg:color_fail))$path ]($style)'
+style = 'fg:color_fg bg:color_bg'
 truncation_length = 5
 read_only = ''
 
@@ -99,7 +99,7 @@ read_only = ''
 # symbol = ''
 symbol = ''
 format = '[$symbol $branch(:$remote_branch) ]($style)'
-style = 'fg:color_red bg:color_mantle'
+style = 'fg:color_fg_git bg:color_bg'
 
 [git_status]
 disabled = true
@@ -109,7 +109,7 @@ disabled = false
 only_detached = false
 tag_disabled = false
 format = '[$tag #$hash ]($style)'
-style = 'fg:color_red bg:color_mantle'
+style = 'fg:color_fg_git bg:color_bg'
 commit_hash_length = 4
 tag_symbol = ''
 
@@ -118,48 +118,48 @@ tag_symbol = ''
 [c]
 symbol = 'gcc: '
 format = '[$symbol($version )]($style)'
-style = 'fg:color_lavender bg:color_mantle'
+style = 'fg:color_fg_recognized bg:color_bg'
 
 [custom.cpp-gcc]
 symbol = 'g++: '
 format = '[$symbol($output )]($style)'
-style = 'fg:color_lavender bg:color_mantle'
+style = 'fg:color_fg_recognized bg:color_bg'
 detect_extensions = ['cpp', 'c++', 'hpp', 'h++']
 command = "g++ --version | tr ' ' '\n' | head -n 3 | tail -n 1"
 
 [docker_context]
 symbol = ' '
 format = '[$symbol$context ]($style)'
-style = 'fg:color_blue bg:color_mantle'
+style = 'fg:color_blue bg:color_bg'
 
 [golang]
 symbol = ''
 format = '[$symbol ($version )]($style)'
-style = 'fg:color_lavender bg:color_mantle'
+style = 'fg:color_fg_recognized bg:color_bg'
 
 [lua]
 symbol = ''
 format = '[$symbol ($version )]($style)'
-style = 'fg:color_lavender bg:color_mantle'
+style = 'fg:color_fg_recognized bg:color_bg'
 
 [nodejs]
 symbol = ''
 format = '[$symbol ($version )]($style)'
-style = 'fg:color_lavender bg:color_mantle'
+style = 'fg:color_fg_recognized bg:color_bg'
 
 [python]
 symbol = ' '
 format =  '[ ${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
-style = 'fg:color_lavender bg:color_mantle'
+style = 'fg:color_fg_recognized bg:color_bg'
 
 [rust]
 symbol = ''
 format = '[$symbol ($version )]($style)'
-style = 'fg:color_lavender bg:color_mantle'
+style = 'fg:color_fg_recognized bg:color_bg'
 
 [cmake]
 format = '[$symbol($version )]($style)'
-style = 'fg:color_lavender bg:color_mantle'
+style = 'fg:color_fg_recognized bg:color_bg'
 
 
 
@@ -171,12 +171,12 @@ disabled = false
 
 [status]
 disabled = false
-style = 'fg:color_text bg:color_base'
+style = 'fg:color_fg bg:color_bg_terminal'
 format = """
 [\
-(Exit code: [$maybe_int]($style fg:color_red))\
-(Exit status: [$common_meaning]($style fg:color_peach))\
-(Signal: [$signal_name]($style fg:color_yellow))]\
+(Exit code: [$maybe_int]($style fg:color_fail))\
+(Exit status: [$common_meaning]($style fg:color_fg_warn))\
+(Signal: [$signal_name]($style fg:color_fg_info))]\
 ($style)\
 """
 
@@ -207,46 +207,14 @@ RedHatEnterprise = "󱄛 "
 
 
 
-[palettes.catppuccin_latte]
-color_pink =      "#ea76cb"
-color_red =       "#d20f39"
-color_peach =     "#fe640b"
-color_yellow =    "#df8e1d"
-color_blue =      "#1e66f5"
-color_lavender =  "#7287fd"
-color_text = "#4c4f69"
-color_base = "#eff1f5"
-color_mantle = "#e6e9ef"
-
-[palettes.catppuccin_frappe]
-color_pink =      "#f4b8e4"
-color_red =       "#e78284"
-color_peach =     "#ef9f76"
-color_yellow =    "#e5c890"
-color_blue =      "#8caaee"
-color_lavender =  "#babbf1"
-color_text = "#c6d0f5"
-color_base = "#303446"
-color_mantle = "#292c3c"
-
-[palettes.catppuccin_macchiato]
-color_pink =      "#f5bde6"
-color_red =       "#ed8796"
-color_peach =     "#f5a97f"
-color_yellow =    "#eed49f"
-color_blue =      "#8aadf4"
-color_lavender =  "#b7bdf8"
-color_text = "#cad3f5"
-color_base = "#24273a"
-color_mantle = "#1e2030"
-
-[palettes.catppuccin_mocha]
-color_pink =      "#f5c2e7"
-color_red =       "#f38ba8"
-color_peach =     "#fab387"
-color_yellow =    "#f9e2af"
-color_blue =      "#89b4fa"
-color_lavender =  "#b4befe"
-color_text = "#cdd6f4"
-color_base = "#1e1e2e"
-color_mantle = "#181825"
+[palettes.kanagawa_dark]
+color_bg = "#16161d"
+color_bg_terminal = "#1f1f28"
+color_fg = "#c8c093"
+color_fg_light = "#938aa9"
+color_fg_recognized = "#7fb4ca"
+color_fg_git = "#c34043"
+color_fg_fail = "#e82424"
+color_fg_warn = "#ff9e3b" #ffa066
+color_fg_info = "#6a9589"
+color_blue = "#7e9cd8"
