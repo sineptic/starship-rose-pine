@@ -90,7 +90,7 @@ style = 'fg:color_fg_recognized bg:color_bg'
 
 [directory]
 truncate_to_repo = true
-format = '[([$read_only ]($style fg:color_fail))$path ]($style)'
+format = '[([$read_only ]($style fg:color_fg_fail))$path ]($style)'
 style = 'fg:color_fg bg:color_bg'
 truncation_length = 5
 read_only = ''
@@ -174,7 +174,7 @@ disabled = false
 style = 'fg:color_fg bg:color_bg_terminal'
 format = """
 [\
-(Exit code: [$maybe_int]($style fg:color_fail))\
+(Exit code: [$maybe_int]($style fg:color_fg_fail))\
 (Exit status: [$common_meaning]($style fg:color_fg_warn))\
 (Signal: [$signal_name]($style fg:color_fg_info))]\
 ($style)\
