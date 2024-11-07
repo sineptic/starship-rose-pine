@@ -90,7 +90,7 @@ style = 'fg:color_fg_recognized bg:color_bg'
 
 [directory]
 truncate_to_repo = true
-format = '[([$read_only ]($style fg:color_fg_fail))$path ]($style)'
+format = '[([$read_only ]($style fg:color_fail))$path ]($style)'
 style = 'fg:color_fg bg:color_bg'
 truncation_length = 5
 read_only = ''
@@ -174,7 +174,7 @@ disabled = false
 style = 'fg:color_fg bg:color_bg_terminal'
 format = """
 [\
-(Exit code: [$maybe_int]($style fg:color_fg_fail))\
+(Exit code: [$maybe_int]($style fg:color_fail))\
 (Exit status: [$common_meaning]($style fg:color_fg_warn))\
 (Signal: [$signal_name]($style fg:color_fg_info))]\
 ($style)\
@@ -209,12 +209,12 @@ RedHatEnterprise = "󱄛 "
 
 [palettes.kanagawa_dark]
 color_bg = "#16161d"
-color_bg_terminal = "#1f1f28"
+color_bg_terminal = "#1d1d26"
 color_fg = "#c8c093"
 color_fg_light = "#938aa9"
-color_fg_recognized = "#7fb4ca"
+color_fg_recognized = "#7aa89f"
 color_fg_git = "#c34043"
-color_fg_fail = "#e82424"
+color_fail = "#e82424"
 color_fg_warn = "#ff9e3b" #ffa066
 color_fg_info = "#6a9589"
 color_blue = "#7e9cd8"
