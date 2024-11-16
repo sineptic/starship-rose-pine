@@ -15,6 +15,11 @@ $directory\
 $git_branch\
 $git_status\
 $git_commit\
+\
+${custom.jjstate_changed}\
+${custom.jjstate_added}\
+${custom.jjstate_deleted}\
+${custom.jj}\
 [ ](fg:color_bg bg:color_bg)\
 $c\
 ${custom.cpp-gcc}\
@@ -112,6 +117,55 @@ format = '[$tag #$hash ]($style)'
 style = 'fg:color_fg_git bg:color_bg'
 commit_hash_length = 4
 tag_symbol = ''
+
+[custom.jj]
+command = '''
+jj log -r@ -n1 --ignore-working-copy --no-graph --color always  -T '
+  separate(" ",
+    bookmarks.map(|x| if(
+        x.name().substr(0, 10).starts_with(x.name()),
+        x.name().substr(0, 10),
+        x.name().substr(0, 9) ++ "…")
+      ).join(" "),
+    tags.map(|x| if(
+        x.name().substr(0, 10).starts_with(x.name()),
+        x.name().substr(0, 10),
+        x.name().substr(0, 9) ++ "…")
+      ).join(" "),
+    surround("\"","\"",
+      if(
+         description.first_line().substr(0, 24).starts_with(description.first_line()),
+         description.first_line().substr(0, 24),
+         description.first_line().substr(0, 23) ++ "…"
+      )
+    ),
+    if(conflict, "conflict"),
+    if(divergent, "divergent"),
+    if(hidden, "hidden"),
+  )
+'
+'''
+detect_folders = [".jj"]
+style = 'fg:color_fg_git bg:color_bg'
+
+[custom.jjstate_changed]
+detect_folders = [".jj"]
+command = '''
+jj log -r@ -n1 --no-graph -T "" --stat | tail -n1 | sd "(\d+) files? changed, (\d+) insertions?\(\+\), (\d+) deletions?\(-\)" ' ${1}m' | sd " 0." ""
+'''
+style = 'fg:color_git_change bg:color_bg'
+[custom.jjstate_added]
+detect_folders = [".jj"]
+command = '''
+jj log -r@ -n1 --no-graph -T "" --stat | tail -n1 | sd "(\d+) files? changed, (\d+) insertions?\(\+\), (\d+) deletions?\(-\)" ' ${2}+' | sd " 0." ""
+'''
+style = 'fg:color_git_add bg:color_bg'
+[custom.jjstate_deleted]
+detect_folders = [".jj"]
+command = '''
+jj log -r@ -n1 --no-graph -T "" --stat | tail -n1 | sd "(\d+) files? changed, (\d+) insertions?\(\+\), (\d+) deletions?\(-\)" ' ${3}-' | sd " 0." ""
+'''
+style = 'fg:color_git_delete bg:color_bg'
 
 
 
@@ -218,3 +272,7 @@ color_fail = "#e82424"
 color_fg_warn = "#ff9e3b" #ffa066
 color_fg_info = "#6a9589"
 color_blue = "#7e9cd8"
+
+color_git_add = "#76946a"
+color_git_delete = "#c34043"
+color_git_change = "#dca561"
