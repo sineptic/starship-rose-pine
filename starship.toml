@@ -1,7 +1,7 @@
 # palette = 'catppuccin_latte'
 # palette = 'catppuccin_frappe'
 # palette = 'catppuccin_macchiato'
-palette = 'kanagawa_dark'
+palette = 'rose_pine'
 
 format = """
 ($status\n)\
@@ -57,8 +57,7 @@ min_time_to_notify = 10_000
 
 show_milliseconds = true
 format = '[$duration ]($style)'
-style = 'fg:color_fg_light bg:color_bg'
-
+style = 'fg:color_fg_time bg:color_bg'
 
 
 [custom.is_folder_config]
@@ -66,7 +65,7 @@ disabled = true
 when = "echo $PWD | grep -q '/.config'"
 symbol = ' '
 format = '[$symbol]($style)'
-style = 'fg:color_blue bg:color_bg'
+style = 'fg:color_fg_recognized bg:color_bg'
 
 [env_var.shell]
 disabled = true
@@ -90,7 +89,6 @@ command = "nvim --version | head -n 1 | tr ' ' '\n' | tail -n 1"
 symbol = 'Meson: '
 format = '[$symbol(\($project\) )]($style)'
 style = 'fg:color_fg_recognized bg:color_bg'
-
 
 
 [directory]
@@ -168,7 +166,6 @@ jj log -r@ -n1 --no-graph -T "" --stat | tail -n1 | sd "(\d+) files? changed, (\
 style = 'fg:color_git_delete bg:color_bg'
 
 
-
 [c]
 symbol = 'gcc: '
 format = '[$symbol($version )]($style)'
@@ -184,7 +181,7 @@ command = "g++ --version | tr ' ' '\n' | head -n 3 | tail -n 1"
 [docker_context]
 symbol = ' '
 format = '[$symbol$context ]($style)'
-style = 'fg:color_blue bg:color_bg'
+style = 'fg:color_fg_recognized bg:color_bg'
 
 [golang]
 symbol = ''
@@ -203,7 +200,7 @@ style = 'fg:color_fg_recognized bg:color_bg'
 
 [python]
 symbol = ' '
-format =  '[ ${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
+format = '[ ${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
 style = 'fg:color_fg_recognized bg:color_bg'
 
 [rust]
@@ -214,10 +211,6 @@ style = 'fg:color_fg_recognized bg:color_bg'
 [cmake]
 format = '[$symbol($version )]($style)'
 style = 'fg:color_fg_recognized bg:color_bg'
-
-
-
-
 
 
 [line_break]
@@ -260,19 +253,17 @@ Redhat = "󱄛 "
 RedHatEnterprise = "󱄛 "
 
 
+[palettes.rose_pine]
+color_bg = "#1f1d2e"
+color_bg_terminal = "#191724"
+color_fg = "#e0def4"
+color_fg_time = "#ebbcba"
+color_fg_recognized = "#31748f"
+color_fg_git = "#eb6f92"
+color_fail = "#eb6f92"
+color_fg_warn = "#ff9e3b"
+color_fg_info = "#f6c177"
 
-[palettes.kanagawa_dark]
-color_bg = "#16161d"
-color_bg_terminal = "#1d1d26"
-color_fg = "#c8c093"
-color_fg_light = "#938aa9"
-color_fg_recognized = "#7aa89f"
-color_fg_git = "#c34043"
-color_fail = "#e82424"
-color_fg_warn = "#ff9e3b" #ffa066
-color_fg_info = "#6a9589"
-color_blue = "#7e9cd8"
-
-color_git_add = "#76946a"
-color_git_delete = "#c34043"
-color_git_change = "#dca561"
+color_git_add = "#c4a7e7"
+color_git_delete = "#eb6f92"
+color_git_change = "#f6c177"
